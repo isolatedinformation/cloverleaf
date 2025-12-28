@@ -3,16 +3,24 @@
   "displayName": "Cloverleaf",
   "description": "Overleaf-like features for LaTeX editing with live preview and SyncTeX",
   "version": "0.1.0",
-  "publisher": "varunseshadri",
+  "publisher": "isolatedinformation",
+  "author": {
+    "name": "Varun Seshadri",
+    "url": "https://github.com/isolatedinformation"
+  },
   "license": "MIT",
   "repository": {
     "type": "git",
     "url": "https://github.com/isolatedinformation/cloverleaf"
   },
+  "bugs": {
+    "url": "https://github.com/isolatedinformation/cloverleaf/issues"
+  },
+  "homepage": "https://github.com/isolatedinformation/cloverleaf#readme",
   "engines": {
     "vscode": "^1.74.0"
   },
-  "categories": ["Other"],
+  "categories": ["Other", "Programming Languages"],
   "keywords": ["latex", "pdf", "preview", "synctex", "overleaf", "cloverleaf"],
   "activationEvents": [
     "onLanguage:latex",
