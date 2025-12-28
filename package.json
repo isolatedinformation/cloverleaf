@@ -1,0 +1,143 @@
+{
+  "name": "cloverleaf",
+  "displayName": "Cloverleaf",
+  "description": "Overleaf-like features for LaTeX editing with live preview and SyncTeX",
+  "version": "0.1.0",
+  "publisher": "varunseshadri",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/isolatedinformation/cloverleaf"
+  },
+  "engines": {
+    "vscode": "^1.74.0"
+  },
+  "categories": ["Other"],
+  "keywords": ["latex", "pdf", "preview", "synctex", "overleaf", "cloverleaf"],
+  "activationEvents": [
+    "onLanguage:latex",
+    "onLanguage:tex",
+    "onCommand:cloverleaf.showPdfPreview",
+    "onCommand:cloverleaf.compile",
+    "onCommand:cloverleaf.syncTex"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "cloverleaf.showPdfPreview",
+        "title": "Cloverleaf: Show PDF Preview",
+        "icon": "$(open-preview)"
+      },
+      {
+        "command": "cloverleaf.compile",
+        "title": "Cloverleaf: Compile Document",
+        "icon": "$(run)"
+      },
+      {
+        "command": "cloverleaf.syncTex",
+        "title": "Cloverleaf: Sync TeX to PDF",
+        "icon": "$(sync)"
+      },
+      {
+        "command": "cloverleaf.syncPdf",
+        "title": "Cloverleaf: Sync PDF to TeX"
+      }
+    ],
+    "keybindings": [
+      {
+        "command": "cloverleaf.compile",
+        "key": "ctrl+shift+l",
+        "mac": "cmd+shift+l",
+        "when": "editorTextFocus && resourceExtname =~ /\\.(tex|latex)/"
+      },
+      {
+        "command": "cloverleaf.syncTex",
+        "key": "ctrl+shift+j",
+        "mac": "cmd+shift+j",
+        "when": "editorTextFocus && resourceExtname =~ /\\.(tex|latex)/"
+      }
+    ],
+    "configuration": {
+      "title": "Cloverleaf",
+      "properties": {
+        "cloverleaf.compiler": {
+          "type": "string",
+          "default": "pdflatex",
+          "enum": ["pdflatex", "xelatex", "lualatex"],
+          "description": "LaTeX compiler to use"
+        },
+        "cloverleaf.compilerArgs": {
+          "type": "array",
+          "default": ["-synctex=1", "-interaction=nonstopmode"],
+          "description": "Arguments to pass to the LaTeX compiler"
+        },
+        "cloverleaf.autoCompile": {
+          "type": "boolean",
+          "default": true,
+          "description": "Automatically compile on save"
+        },
+        "cloverleaf.autoCompileDelay": {
+          "type": "number",
+          "default": 1000,
+          "description": "Delay in milliseconds before auto-compiling after save"
+        },
+        "cloverleaf.pdfViewer.zoom": {
+          "type": "string",
+          "default": "auto",
+          "enum": ["auto", "page-actual", "page-fit", "page-width"],
+          "description": "Default zoom level for PDF viewer"
+        },
+        "cloverleaf.pdfViewer.spreadMode": {
+          "type": "string",
+          "default": "none",
+          "enum": ["none", "odd", "even"],
+          "description": "Page spread mode for PDF viewer"
+        },
+        "cloverleaf.synctex.indicator": {
+          "type": "boolean",
+          "default": true,
+          "description": "Show SyncTeX indicator in PDF"
+        }
+      }
+    },
+    "menus": {
+      "editor/title": [
+        {
+          "when": "resourceExtname =~ /\\.(tex|latex)/",
+          "command": "cloverleaf.showPdfPreview",
+          "group": "navigation"
+        },
+        {
+          "when": "resourceExtname =~ /\\.(tex|latex)/",
+          "command": "cloverleaf.compile",
+          "group": "navigation"
+        }
+      ]
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "pretest": "npm run compile && npm run lint",
+    "lint": "eslint src --ext ts",
+    "test": "node ./out/test/runTest.js"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.74.0",
+    "@types/glob": "^8.0.0",
+    "@types/mocha": "^10.0.1",
+    "@types/node": "16.x",
+    "@typescript-eslint/eslint-plugin": "^5.45.0",
+    "@typescript-eslint/parser": "^5.45.0",
+    "eslint": "^8.28.0",
+    "glob": "^8.0.3",
+    "mocha": "^10.1.0",
+    "typescript": "^4.9.3",
+    "@vscode/test-electron": "^2.2.0"
+  },
+  "dependencies": {
+    "pdfjs-dist": "^3.11.174"
+  }
+}
