@@ -11,12 +11,12 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/isolatedinformation/cloverleaf"
+    "url": "https://github.com/g-alfieri/cloverleaf"
   },
   "bugs": {
-    "url": "https://github.com/isolatedinformation/cloverleaf/issues"
+    "url": "https://github.com/g-alfieri/cloverleaf/issues"
   },
-  "homepage": "https://github.com/isolatedinformation/cloverleaf#readme",
+  "homepage": "https://github.com/g-alfieri/cloverleaf#readme",
   "engines": {
     "vscode": "^1.74.0"
   },
@@ -57,13 +57,13 @@
         "command": "cloverleaf.compile",
         "key": "ctrl+shift+l",
         "mac": "cmd+shift+l",
-        "when": "editorTextFocus && resourceExtname =~ /\\.(tex|latex)/"
+        "when": "editorTextFocus && (editorLangId == latex || editorLangId == tex)"
       },
       {
         "command": "cloverleaf.syncTex",
         "key": "ctrl+shift+j",
         "mac": "cmd+shift+j",
-        "when": "editorTextFocus && resourceExtname =~ /\\.(tex|latex)/"
+        "when": "editorTextFocus && (editorLangId == latex || editorLangId == tex)"
       }
     ],
     "configuration": {
@@ -112,12 +112,12 @@
     "menus": {
       "editor/title": [
         {
-          "when": "resourceExtname =~ /\\.(tex|latex)/",
+          "when": "resourceLangId == latex || resourceLangId == tex",
           "command": "cloverleaf.showPdfPreview",
           "group": "navigation"
         },
         {
-          "when": "resourceExtname =~ /\\.(tex|latex)/",
+          "when": "resourceLangId == latex || resourceLangId == tex",
           "command": "cloverleaf.compile",
           "group": "navigation"
         }
